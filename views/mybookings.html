@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>house</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+      crossorigin="anonymous"
+    />
+  </head>
+  <!-- Basic style -->
+  <style>
+    .img-container {
+      margin: 20px auto;
+      position: relative;
+    }
+
+    .btn-container {
+      position: absolute;
+      text-align: center;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 10px;
+      top: 42%;
+      /* width: 100%; */
+    }
+
+    .img-container > img {
+      height: 400px;
+      width: 100%;
+      display: block;
+      margin: auto;
+      padding-bottom: 20px;
+    }
+
+    .btn-container > button {
+      outline: none;
+      width: 40px;
+      height: 40px;
+      border: none;
+      background-color: rgb(25, 121, 211);
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+    }
+
+    .btn-container > button:last-child {
+      margin: 0 50px 0 0;
+    }
+  </style>
+
+  <body class="bg-dark">
+    <section>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+          <a class="navbar-brand p-0" href="/home">
+            <img
+              src="https://i.pinimg.com/originals/1f/06/86/1f068632bb0b0bc410d18c815c583cdc.png"
+              alt=""
+              width="60px"
+            />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/home"
+                  >Home</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="/hoster">Become a hoster</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="/mybookings">my booking's</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="/logout">logout</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div class="py-3 px-2 bg-dark overflow-auto">
+        <!-- post component -->
+        <div
+          class="bg-light m-auto px-2 rounded-2"
+          style="width: max(40rem, 70%)"
+        >
+          <h3 class="p-2">My bookings</h3>
+          <div class="py-3">
+            <table class="table py-3">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Propertiy</th>
+                  <th scope="col">Bookeddate</th>
+                  <th scope="col">guest Name</th>
+                  <th scope="col">details</th>
+                </tr>
+              </thead>
+              <tbody class="tableBody py-3">
+                <!-- users  details -->
+                <!-- <tr>
+                            <th scope="row">1</th>
+                            <td>big house</td>
+                            <td>good</td>
+                            <td>19000</td>
+                            <td><a href="http://localhost:4000/mybooking/details">Check more</a></td>
+                        </tr> -->
+                <!-- <tr>
+                            <th scope="row">2</th>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>@fat</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td colspan="2">Larry the Bird</td>
+                            <td>@twitter</td>
+                        </tr> -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Javascript code for -->
+    <script>
+      async function fetchbookedrooms() {
+        const SERVER = "http://localhost:5000";
+
+        try {
+          const tableBody = document.querySelector(".tableBody");
+          // fetch data here
+          const fetchs = await fetch(`${SERVER}/fetchmybookedrooms`);
+
+          // convert data to json
+          const data = await fetchs.json();
+          if (data.length === 0) {
+            tableBody.innerHTML = `<h3>no booking yet</h3>
+                     <br>
+                      <a href="/home ">
+                        <button class="btn btn-info">Book now</button> </a>`;
+          } else {
+            let tableindex = 1;
+            console.log(data.length);
+            for (i = 0; i < data.length; i++) {
+              const bookedTime = new Date(data[i].roomDetails.updated);
+              console.log(bookedTime);
+              const tr = document.createElement("tr");
+
+              tr.innerHTML = `
+                        <!--  index-->
+                        <th scope="row">${tableindex}</th>
+                        <!--property-->
+                        <td >${data[i].roomDetails.propertyName}</td>
+                        <!--Bookeddate-->
+                        <td >${
+                          bookedTime.getDate() > 10
+                            ? bookedTime.getDate()
+                            : `0${bookedTime.getDate()}`
+                        }-${
+                bookedTime.getMonth() + 1
+              }-${bookedTime.getFullYear()}</td>
+                        <!-- Guestname-->
+                        <td>${data[i].GuestName}</td>
+                        <!-- Detail link-->
+                        <td><a href="/mybooking?id=${
+                          data[i]._id
+                        }">Check more</a></td>
+                        `;
+              tableBody.appendChild(tr);
+              tableindex++;
+              console.log(i);
+              console.log(data[i]);
+            }
+          }
+        } catch (err) {
+          // err
+          console.log(err);
+        }
+      }
+      fetchbookedrooms();
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

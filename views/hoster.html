@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>hoster</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container-fluid">
+        <a class="navbar-brand p-0" href="/home">
+          <img
+            src="https://i.pinimg.com/originals/1f/06/86/1f068632bb0b0bc410d18c815c583cdc.png"
+            alt=""
+            width="60px"
+          />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/home"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/hoster">Become a hoster</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/mybookings">my booking's</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/logout">logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="bg-dark p-3">
+      <div class="bg-light rounded-2 col-lg-8 col-12 overflow-hidden mx-auto">
+        <div
+          class="bg-secondary overflow-hidden text-light shadow-lg px-3 py-2 border-bottom border-secondary"
+        >
+          <h3>Rent do..& Paisa KamaAo..</h3>
+        </div>
+
+        <form
+          action="/hoster"
+          method="post"
+          enctype="multipart/form-data"
+          class="row g-3 col-12 col-md-8 py-3 px-2"
+        >
+          <div class="col-md-6 col-12">
+            <label for="inputEmail4" class="form-label"
+              >Name of the property</label
+            >
+            <input
+              required
+              type="text"
+              class="form-control w-100"
+              name="propertyName"
+              id="inputEmail4"
+            />
+          </div>
+          <div class="col-md-6 col-12">
+            <label for="inputEmail4" class="form-label">Write a title</label>
+            <input
+              required
+              type="text"
+              class="form-control w-100"
+              name="mainTitle"
+              id="inputEmail4"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="formFileMultiple" class="form-label"
+              >Upload photos here</label
+            ><span style="font-size: 0.7rem" class="text-muted text"
+              > Note: maximum upload 5</span
+            >
+            <input
+              required
+              class="form-control"
+              type="file"
+              max="5"
+              name="files"
+              size="5"
+              maxlength="5"
+              multiple
+            />
+          </div>
+
+          <div class="col-3">
+            <label for="inputAddress" class="form-label">guest</label>
+            <input
+              required
+              type="number"
+              class="form-control"
+              name="totalGuest"
+              id="inputAddress"
+            />
+          </div>
+          <div class="col-3">
+            <label for="inputAddress" class="form-label">Beds</label>
+            <input
+              required
+              type="number"
+              class="form-control"
+              name="totalBeds"
+              id="inputAddress"
+            />
+          </div>
+          <div class="col-3">
+            <label for="inputAddress" class="form-label">bedrooms</label>
+            <input
+              required
+              type="number"
+              class="form-control"
+              name="totalBedrooms"
+              id="inputAddress"
+            />
+          </div>
+          <div class="col-3">
+            <label for="inputAddress" class="form-label">bathrooms</label>
+            <input
+              required
+              type="number"
+              class="form-control"
+              name="totalBathrooms"
+              id="inputAddress"
+            />
+          </div>
+
+          <div class="col-md-8">
+            <label for="inputEmail4" class="form-label">
+              Size/Area(in square feet/meter)</label
+            >
+            <input
+              required
+              type="number"
+              class="form-control w-50"
+              name="size"
+              id="inputEmail4"
+            />
+          </div>
+
+          <label for="floatingTextarea2">Place Description</label>
+          <div class="form-floating">
+            <textarea
+              required
+              class="form-control p-0"
+              placeholder="Leave a comment here"
+              name="description"
+              id="floatingTextarea2"
+              style="height: 100px"
+            ></textarea>
+          </div>
+          <div class="container py-2">
+            <!-- Amenities -->
+            <h3>Amenities</h3>
+            <div class="">
+              <h4>Indoor</h4>
+              <div class="row px-3">
+                <div class="form-check col-lg-3 col-6">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    name="indoor"
+                    value="Kitchen"
+                    id="flexCheckDefault"
+                  />
+                  <label class="form-check-label" for="flexCheckDefault">
+                    Kitchen
+                  </label>
+                </div>
+                <div class="form-check col-lg-3 col-6">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    name="indoor"
+                    value="Smoking"
+                    id="flexCheckDefault"
+                  />
+                  <label class="form-check-label" for="flexCheckDefault">
+                    Smoking
+                  </label>
+                </div>
+                <div class="form-check col-lg-3 col-6">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    name="indoor"
+                    value="Pets"
+                    id="flexCheckDefault"
+                  />
+                  <label class="form-check-label" for="flexCheckDefault">
+                    Pets
+                  </label>
+                </div>
+                <div class="form-check col-lg-3 col-6">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    name="indoor"
+                    value="Building staff"
+                    id="flexCheckDefault"
+                  />
+                  <label class="form-check-label" for="flexCheckDefault">
+                    Building staff
+                  </label>
+                </div>
+                <div class="form-check col-lg-3 col-6">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    name="indoor"
+                    value="dining table"
+                    id="flexCheckDefault"
+                  />
+                  <label class="form-check-label" for="flexCheckDefault">
+                    dining table
+                  </label>
+                </div>
+                <div class="form-check col-lg-3 col-6">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    name="indoor"
+                    value="Big hall"
+                    id="flexCheckDefault"
+                  />
+                  <label class="form-check-label" for="flexCheckDefault">
+                    Big hall
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- end of indoor -->
+            <div class="">
+              <!-- outdoor -->
+              <h4>outdoor</h4>
+              <div class="px-3 row">
+                <div class="form-check col-lg-3 col-6">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    name="outdoor"
+                    value="Private patio or balcony"
+                    id="flexCheckDefault"
+                  />
+                  <label class="form-check-label" for="flexCheckDefault">
+                    Private patio or balcony
+                  </label>
+                </div>
+                <div class="form-check col-lg-3 col-6">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    name="outdoor"
+                    value="garden"
+                    id="flexCheckDefault"
+                  />
+                  <label class="form-check-label" for="flexCheckDefault">
+                    garden
+                  </label>
+                </div>
+                <div class="form-check col-lg-3 col-6">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    name="outdoor"
+                    value="playground"
+                    id="flexCheckDefault"
+                  />
+                  <label class="form-check-label" for="flexCheckDefault">
+                    playground
+                  </label>
+                </div>
+                <div class="form-check col-lg-3 col-6">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    name="outdoor"
+                    value="swimmingpool"
+                    id="flexCheckDefault"
+                  />
+                  <label class="form-check-label" for="flexCheckDefault">
+                    swimmingpool
+                  </label>
+                </div>
+                <div class="form-check col-lg-3 col-6">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    name="outdoor"
+                    value="BBQ grill"
+                    id="flexCheckDefault"
+                  />
+                  <label class="form-check-label" for="flexCheckDefault">
+                    BBQ grill
+                  </label>
+                </div>
+                <div class="form-check col-lg-3 col-6">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    name="outdoor"
+                    value="parking"
+                    id="flexCheckDefault"
+                  />
+                  <label class="form-check-label" for="flexCheckDefault">
+                    parking
+                  </label>
+                </div>
+              </div>
+            </div>
+            <!-- end of outdoor -->
+            <div class="">
+              <!-- Essentials -->
+              <h4>Essentials</h4>
+              <div class="px-3 row">
+                <div class="form-check col-lg-3 col-6">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    name="essentials"
+                    value="Wi-Fi"
+                    id="flexCheckDefault"
+                  />
+                  <label class="form-check-label" for="flexCheckDefault">
+                    Wi-Fi
+                  </label>
+                </div>
+                <div class="form-check col-lg-3 col-6">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    name="essentials"
+                    value="AC"
+                    id="flexCheckDefault"
+                  />
+                  <label class="form-check-label" for="flexCheckDefault">
+                    AC
+                  </label>
+                </div>
+                <div class="form-check col-lg-3 col-6">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    name="essentials"
+                    value="TV"
+                    id="flexCheckDefault"
+                  />
+                  <label class="form-check-label" for="flexCheckDefault">
+                    TV
+                  </label>
+                </div>
+                <div class="form-check col-lg-3 col-6">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    name="essentials"
+                    value="Refrigerator"
+                    id="flexCheckDefault"
+                  />
+                  <label class="form-check-label" for="flexCheckDefault">
+                    Refrigerator
+                  </label>
+                </div>
+                <div class="form-check col-lg-3 col-6">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    name="essentials"
+                    value="Microwave"
+                    id="flexCheckDefault"
+                  />
+                  <label class="form-check-label" for="flexCheckDefault">
+                    Microwave
+                  </label>
+                </div>
+                <div class="form-check col-lg-3 col-6">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    name="essentials"
+                    value="Heater"
+                    id="flexCheckDefault"
+                  />
+                  <label class="form-check-label" for="flexCheckDefault">
+                    Heater
+                  </label>
+                </div>
+              </div>
+            </div>
+            <!-- End Essentials -->
+            <!-- End Amenities -->
+          </div>
+
+          <div class="col-12">
+            <label for="inputAddress" class="form-label">Address</label>
+            <input
+              required
+              type="text"
+              class="form-control"
+              name="addressDetail"
+              id="inputAddress"
+              placeholder="1234 Main St"
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="inputCity" class="form-label">City</label>
+            <input
+              required
+              type="text"
+              class="form-control"
+              name="city"
+              id="inputCity"
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="inputState" class="form-label">State</label>
+            <input
+              required
+              type="text"
+              class="form-control"
+              name="state"
+              id="inputState"
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="inputCountry" class="form-label">Country</label>
+            <input
+              required
+              type="text"
+              class="form-control"
+              name="country"
+              id="inputCountry"
+            />
+          </div>
+
+          <div class="col-12">
+            <label for="inputEmail4" class="form-label">Pricing</label>
+            <input
+              required
+              type="number"
+              class="form-control"
+              name="price"
+              id="inputEmail4"
+            />
+          </div>
+
+          <div class="col-12">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="gridCheck" />
+              <label class="form-check-label" for="gridCheck">
+                Free trial
+              </label>
+            </div>
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary">Post</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
