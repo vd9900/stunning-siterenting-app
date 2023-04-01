@@ -35,10 +35,7 @@ const galleryStorage = multer.diskStorage({
   },
 });
 
-const gallery = multer(
-  { limits: { files: 5 } },
-  { storage: galleryStorage }
-).array("files", 5);
+const gallery = multer({ storage: galleryStorage }).array("files", 5);
 
 Router.get("/", (req, res) => {
   if (req.session.isAuth) {
@@ -50,6 +47,7 @@ Router.get("/", (req, res) => {
 });
 
 Router.post("/", gallery, async (req, res) => {
+  console.log(req.files);
   let properityId = 0;
   if ((await HostedRoomDetails.count({})) == 0) {
     properityId = 1;
@@ -65,7 +63,6 @@ Router.post("/", gallery, async (req, res) => {
   console.log(imageData);
   console.log(properityId);
   console.log(req.session);
-  console.log(req.body);
 
   const newHostedRoomDetails = new HostedRoomDetails({
     propertyId: properityId,
@@ -95,11 +92,11 @@ Router.post("/", gallery, async (req, res) => {
   }).save((err) => {
     if (err) {
       res.send(
-        `Something went Wrong try again😭 <a href="https://airbnb-clone-new.herokuapp.com/home">back to home</a>`
+        `Something went Wrong try again😭 <a href="/home">back to home</a>`
       );
     } else {
       res.send(
-        `<h2>Your post successfully added😊 <a href="https://airbnb-clone-new.herokuapp.com/home">back to home</a><h2>`
+        `<h2>Your post successfully added😊 <a href="/home">back to home</a><h2>`
       );
     }
   });

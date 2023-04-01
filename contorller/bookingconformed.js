@@ -1,10 +1,7 @@
-
-const { BookedroomDetails } = require("../Schemas/schema")
-
-
+const { BookedroomDetails } = require("../Schemas/schema");
 
 async function bookingconformedGET(req, res) {
-  console.log(req.session.bookedRoom.roomDetails)
+  console.log(req.session.bookedRoom.roomDetails);
   // console.log(req.session.roomDetails)
   if (req.session.isAuth) {
     const newBookedroomDetails = await new BookedroomDetails({
@@ -23,19 +20,21 @@ async function bookingconformedGET(req, res) {
         city: req.session.bookedRoom.roomDetails.city,
         country: req.session.bookedRoom.roomDetails.country,
         updated: req.session.bookedRoom.roomDetails.updated,
+      },
+    }).save((err) => {
+      if (!err) {
+        res.send(
+          `<h3>Awesome... your rocked🤩 booking conformed <br> <a href="/mybookings">Go to my booking</a></h3>`
+        );
+      } else {
+        res.send(
+          `<h3>Something went wrong Try again later <br> <a href="/home">Go to home page</a></h3>`
+        );
       }
-    }).save(
-      (err) => {
-        if (!err) {
-          res.send(`<h3>Awesome... your rocked🤩 booking conformed <br> <a href="https://airbnb-clone-new.herokuapp.com/mybookings">Go to my booking</a></h3>`)
-        } else {
-          res.send(`<h3>Something went wrong Try again later <br> <a href="https://airbnb-clone-new.herokuapp.com/home">Go to home page</a></h3>`)
-        }
-      }
-    )
-  }else{
-    res.redirect("/login")
+    });
+  } else {
+    res.redirect("/login");
   }
 }
 
-module.exports = { bookingconformedGET }
+module.exports = { bookingconformedGET };

@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="server-url" content="__SERVER_URL__" />
+
     <title>house</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
@@ -141,12 +143,13 @@
     <!-- Javascript code for -->
     <script>
       async function fetchbookedrooms() {
-        const SERVER = "http://localhost:5000";
-
+        const serverUrl = document
+          .querySelector('meta[name="server-url"]')
+          .getAttribute("content");
         try {
           const tableBody = document.querySelector(".tableBody");
           // fetch data here
-          const fetchs = await fetch(`${SERVER}/fetchmybookedrooms`);
+          const fetchs = await fetch(`${serverUrl}/fetchmybookedrooms`);
 
           // convert data to json
           const data = await fetchs.json();

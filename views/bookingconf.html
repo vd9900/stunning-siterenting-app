@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="server-url" content="__SERVER_URL__" />
+
     <title>booking conformation</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
@@ -228,11 +230,12 @@
       const totalPrice = document.querySelector("#totalPrice");
       const payment = document.querySelector("#payment");
       async function fetchpropertydata() {
-        const SERVER = "http://localhost:5000";
-
+        const serverUrl = document
+          .querySelector('meta[name="server-url"]')
+          .getAttribute("content");
         try {
           // fetch data here
-          const fetchs = await fetch(`${SERVER}/fetchbookedRoom`);
+          const fetchs = await fetch(`${serverUrl}/fetchbookedRoom`);
 
           // convert  json to data
           const data = await fetchs.json();

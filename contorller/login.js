@@ -12,15 +12,15 @@ function loginGET(req, res) {
       res.sendFile(path.join(__dirname, "../views/index.html"));
     }
   } catch {
-    res.send("Something went wrong Try again later");
+    res.send(
+      "<h2>😭 Something went wrong Try again later <a href='/login'>Try Again</a> </h2>"
+    );
   }
 }
 
 // POST Method
 
 async function loginPOST(req, res) {
-  console.log(req.body);
-
   try {
     const result = await UserDetail.findOne({ email: req.body.email }, {});
 
@@ -35,16 +35,18 @@ async function loginPOST(req, res) {
         res.redirect("/home");
       } else {
         res.send(
-          `<h2>🤨 wrong password try again <a href="${process.env.SERVER_URL}/login">login</a></h2>`
+          `<h2>🤨 wrong password try again <a href="/login">login</a></h2>`
         );
       }
     } else {
       res.send(
-        `<h2>😭 User not founded! try again <a href="${process.env.SERVER_URL}/login">login</a></h2>`
+        `<h2>😭 User not founded! try again <a href="/login">login</a></h2>`
       );
     }
   } catch {
-    res.send("Something went wrong Try again later");
+    res.send(
+      "<h2>😭 Something went wrong Try again later <a href='/login'>Try Again</a> </h2>"
+    );
   }
 }
 

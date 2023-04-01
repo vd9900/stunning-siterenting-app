@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="server-url" content="__SERVER_URL__" />
+
     <title>my booking details</title>
     <link
       rel="stylesheet"
@@ -337,13 +339,13 @@
 
                 <div class="my-2">
                   <input
-                  type="number"
-                  required
-                  max="5"
-                  name="rating"
-                  class="ps-1 bg-dark text-light w-100"
-                  placeholder="give rating"
-                />
+                    type="number"
+                    required
+                    max="5"
+                    name="rating"
+                    class="ps-1 bg-dark text-light w-100"
+                    placeholder="give rating"
+                  />
                 </div>
                 <div class="star-widget">
                   <div class="textarea">
@@ -371,13 +373,14 @@
     <script>
       async function fetchbookedroom() {
         try {
-          const SERVER = "http://localhost:5000";
+          const serverUrl = document
+            .querySelector('meta[name="server-url"]')
+            .getAttribute("content");
           // fetch data here
-          const fetchs = await fetch(`${SERVER}/fetchmybookedroom`);
+          const fetchs = await fetch(`${serverUrl}/fetchmybookedroom`);
           // convert data to json
           const dataArray = await fetchs.json();
           const data = dataArray[0];
-          console.log(data);
           const mainTitle = document.getElementById("maintitle");
           const country = document.getElementById("country");
           const city = document.getElementById("city");

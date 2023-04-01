@@ -19,7 +19,7 @@ function signinPOST(req, res) {
   NewUserDetail.save((err, docs) => {
     if (err) {
       console.log(err)
-      res.send("please try again later")
+      res.send("<h2>😭 Something went wrong Try again later <a href='/login'>Try Again</a> </h2>")
     } else {
       res.redirect("/login")
     }
