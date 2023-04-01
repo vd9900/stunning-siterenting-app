@@ -3,9 +3,9 @@
   "name": "RENT-APP",
 
   "env": {
-    "DATABASE_URL": "mongodb+srv://new-user_99:9900787798@cluster0.koih8os.mongodb.net/RENT-APP?retryWrites=true&w=majority",
-    "SECRET": "@my-secret-name"
+    "DATABASE_URL": "mongodb+srv://new-user_99:9900787798@cluster0.koih8os.mongodb.net/RENT-APP?retryWrites=true&w=majority"
+    
   },
-  "builds": [{ "src": "./server.js", "use": "@vercel/node" }],
+  "builds": [{ "src": "server.js", "use": "@vercel/node" }],
   "routes": [{ "src": "/(.*)", "dest": "/app.js" }]
 }
