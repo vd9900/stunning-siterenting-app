@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const moongose = require("mongoose");
+const cors = require("cors");
 const path = require("path");
 const multer = require("multer");
 var session = require("express-session");
@@ -13,6 +14,8 @@ const appRouter = express.Router();
 env.config({ path: "./config.env" });
 require("dotenv").config();
 //session
+
+app.use(cors());
 const port = process.env.PORT || 5000;
 app.set("trust proxy", 1); // trust first proxy)
 app.use(
