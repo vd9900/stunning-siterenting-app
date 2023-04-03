@@ -8,6 +8,7 @@ var session = require("express-session");
 const env = require("dotenv");
 var cookieParser = require("cookie-parser");
 const { default: mongoose } = require("mongoose");
+const fileUpload = require("express-fileupload");
 const app = express();
 const appRouter = express.Router();
 
@@ -16,6 +17,11 @@ require("dotenv").config();
 //session
 
 app.use(cors());
+app.use(
+  fileUpload({
+    useTempFiles: true,
+  })
+);
 const port = process.env.PORT || 5000;
 app.set("trust proxy", 1); // trust first proxy)
 app.use(
@@ -134,6 +140,7 @@ appRouter.get("/fetchproperty", async (req, res) => {
 // fecthing data to front-end
 app.get("/fetchproperties", async (req, res) => {
   const result = await HostedRoomDetails.find({}, {});
+  console.log(result);
   res.json(result);
 });
 

@@ -164,7 +164,7 @@
             <span><span class="bathRooms"></span>-bathrooms</span>
           </div>
           <!-- ratings -->
-          <div class="my-3 fs-3">Rating: <span id="rating"></span>/5</div>
+          <div class="my-3 fs-3">Rating: <span id="rating"></span></div>
 
           <!-- Amenities -->
           <h4>Amenities</h4>
@@ -378,7 +378,7 @@
             let total_user_rated = reviewData.length;
             let total_rating = reviewData[total_user_rated - 1].totalrating;
             let sum_of_max_rating_of_user_count = total_user_rated * 5;
-            return (total_rating * 5) / sum_of_max_rating_of_user_count;
+            return (total_rating * 5) / sum_of_max_rating_of_user_count + "/5";
           };
           console.log(realrating());
           rating.innerText = realrating();
@@ -388,7 +388,7 @@
             const carousel_item = document.createElement("div");
             carousel_item.classList.add("carousel-item", "active");
             const newImg = document.createElement("img");
-            newImg.src = `/assets/${data.roomImage[i]}`;
+            newImg.src = `${data?.roomImage[i]?.res}`;
             newImg.alt = "post";
             newImg.classList.add("d-block", "w-100");
             carousel_item.appendChild(newImg);

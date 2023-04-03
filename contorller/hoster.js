@@ -4,10 +4,27 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const multer = require("multer");
 const { HostedRoomDetails } = require("../Schemas/schema");
+const cloudinary = require("cloudinary").v2;
+
+cloudinary.config({
+  cloud_name: "dtsxq1mlu",
+  api_key: "567644344666746",
+  api_secret: "W0wiwCrwT9KxRvuDEbsTrbsaGss",
+});
 
 const app = express();
 const Router = express.Router();
 
+const cloudinaryImageUploadMethod = async (file) => {
+  return new Promise((resolve) => {
+    cloudinary.uploader.upload(file, { folder: "upload" }, (err, res) => {
+      if (err) return res.status(500).send("upload image error");
+      resolve({
+        res: res.secure_url,
+      });
+    });
+  });
+};
 //session
 app.set("trust proxy", 1); // trust first proxy
 app.use(
@@ -20,22 +37,8 @@ app.use(
 );
 
 // image storing path
-const galleryStorage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "./views/assets");
-  },
-  filename: (req, file, cb) => {
-    console.log(file);
-    cb(
-      null,
-      Date.now() +
-        path.parse(file.originalname).name +
-        path.extname(file.originalname)
-    );
-  },
-});
-
-const gallery = multer({ storage: galleryStorage }).array("files", 5);
+const storage = multer.memoryStorage();
+const gallery = multer({ storage: storage }).array("files", 5);
 
 Router.get("/", (req, res) => {
   if (req.session.isAuth) {
@@ -46,8 +49,8 @@ Router.get("/", (req, res) => {
   console.log(req.session.isAuth);
 });
 
-Router.post("/", gallery, async (req, res) => {
-  console.log(req.files);
+Router.post("/", async (req, res) => {
+  // console.log(req.body);
   let properityId = 0;
   if ((await HostedRoomDetails.count({})) == 0) {
     properityId = 1;
@@ -55,14 +58,28 @@ Router.post("/", gallery, async (req, res) => {
     let newPropertiyId = await HostedRoomDetails.findOne().sort("-_id");
     properityId = newPropertiyId.propertyId + 1;
   }
+
   // push images one by one into array
-  let imageData = [];
-  for (let i = 0; i < req.files.length; i++) {
-    imageData.push(req.files[i].filename);
+  console.log(req.files);
+  const urls = [];
+  const files = req.files;
+  for (let i = 0; i < files.length; i++) {
+    const { tempFilePath } = files[i];
+    const newPath = await cloudinaryImageUploadMethod(tempFilePath);
+    urls.push(newPath);
   }
-  console.log(imageData);
-  console.log(properityId);
-  console.log(req.session);
+  // const imageData = await Promise.all(
+  //   req.files.map(async (file) => {
+  //     const result = await cloudinary.uploader.upload(file.buffer, {
+  //       folder: "your_folder_name",
+  //       use_filename: true,
+  //     });
+  //     return result.secure_url;
+  //   })
+  // );
+  // console.log(imageData);
+  // console.log(properityId);
+  // console.log(req.session);
 
   const newHostedRoomDetails = new HostedRoomDetails({
     propertyId: properityId,
@@ -75,7 +92,7 @@ Router.post("/", gallery, async (req, res) => {
     },
     price: req.body.price,
     size: req.body.size,
-    roomImage: imageData,
+    roomImage: [],
     total: {
       Bedrooms: req.body.totalBedrooms,
       Beds: req.body.totalBeds,
@@ -89,7 +106,9 @@ Router.post("/", gallery, async (req, res) => {
       outdoor: req.body.outdoor,
       essentials: req.body.essentials,
     },
-  }).save((err) => {
+  });
+
+  newHostedRoomDetails.save((err) => {
     if (err) {
       res.send(
         `Something went Wrong try again😭 <a href="/home">back to home</a>`
@@ -101,4 +120,5 @@ Router.post("/", gallery, async (req, res) => {
     }
   });
 });
+
 module.exports = Router;

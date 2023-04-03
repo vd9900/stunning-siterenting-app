@@ -95,10 +95,12 @@ width="55px"            /> </a
 
           // convert data to json
           const data = await fetchs.json();
-
+          console.log(data.length);
           // create cards here
           for (let i = 0; i < data.length; i++) {
+            console.log(i);
             // console.log(data[i].roomImage[1])
+            console.log(data[i]);
 
             const Maincard = document.createElement("div");
             Maincard.classList.add(
@@ -112,16 +114,16 @@ width="55px"            /> </a
               "rounded-2",
               "overflow-hidden"
             );
-            const card = `<a href="/property?id=${data[i].propertyId}" ; class="text-decoration-none text-black p-0"><div class="img d-flex bg-secondary">
-                <img class="card-img-top w-75 mx-auto" style="height:22rem;"; src="/views/assets/${data[i].roomImage[0]}" alt="Card image cap">
+            const card = `<a href="/property?id=${data[i]?.propertyId}" ; class="text-decoration-none text-black p-0"><div class="img d-flex bg-secondary">
+                <img class="card-img-top w-75 mx-auto" style="height:22rem;"; src="${data[i]?.roomImage[0]?.res}" alt="Card image cap">
             </div>
             <div class="cards-detail  rounded-3 my-2">
                 <div class="card-heading d-flex justify-content-between px-2">
-                    <h5 class="card-title">${data[i].propertyName}</h5>
+                    <h5 class="card-title">${data[i]?.propertyName}</h5>
                 </div>
-                <p class="card-text px-2">${data[i].address.city}, ${data[i].address.country}</p>
+                <p class="card-text px-2">${data[i].address?.city}, ${data[i].address?.country}</p>
                 <div class="border-top border-secondary py-1 px-2 text-end">
-                  <p class="card-text"><strong class="fs-5">₹${data[i].price}</strong>/night</p>
+                  <p class="card-text"><strong class="fs-5">₹${data[i]?.price}</strong>/night</p>
                   </div>
             </div></a>`;
             Maincard.innerHTML = card;
