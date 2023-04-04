@@ -361,15 +361,15 @@
           const data = await fetchs.json();
           const reviewData = await reviewFetch.json();
           // fetching all product deatils
-          propertyName.innerHTML = data.propertyName;
-          mainTitle.innerHTML = data.mainTitle;
-          ownerName.innerHTML = data.owner;
-          price.innerHTML = `₹${data.price}`;
-          roomDescription.innerHTML = data.roomDescription;
-          guest.innerHTML = data.total.Allowedpeople;
-          beds.innerHTML = data.total.Beds;
-          bedRooms.innerHTML = data.total.Bedrooms;
-          bathRooms.innerHTML = data.total.Bathrooms;
+          propertyName.innerHTML = data?.propertyName;
+          mainTitle.innerHTML = data?.mainTitle;
+          ownerName.innerHTML = data?.owner;
+          price.innerHTML = `₹${data?.price}`;
+          roomDescription.innerHTML = data?.roomDescription;
+          guest.innerHTML = data?.total?.Allowedpeople;
+          beds.innerHTML = data?.total?.Beds;
+          bedRooms.innerHTML = data?.total?.Bedrooms;
+          bathRooms.innerHTML = data?.total?.Bathrooms;
           // console.log(reviewData);
           console.log(data.roomImage[0]);
           // console.log(data.roomImage);
@@ -401,19 +401,19 @@
           for (let i = 0; i < data.amenities.indoor.length; i++) {
             const li = document.createElement("li");
             li.classList.add("list-group-item");
-            li.innerHTML = `${data.amenities.indoor[i]}`;
+            li.innerHTML = `${data?.amenities?.indoor[i]}`;
             indoor.appendChild(li);
           }
           //outdoor
           for (let i = 0; i < data.amenities.outdoor.length; i++) {
             const li = document.createElement("li");
             li.classList.add("list-group-item");
-            li.innerHTML = `${data.amenities.outdoor[i]}`;
+            li.innerHTML = `${data?.amenities?.outdoor[i]}`;
             outdoor.appendChild(li);
             console.log(li);
           }
           //essentials
-          for (let i = 0; i < data.amenities.essentials.length; i++) {
+          for (let i = 0; i < data?.amenities?.essentials?.length; i++) {
             const li = document.createElement("li");
             li.classList.add("list-group-item");
             li.innerHTML = `${data.amenities.essentials[i]}`;
@@ -444,12 +444,12 @@
             div.innerHTML = `
                     <p class="mb-0">
                            UserName: <b>
-                               <span>${reviewData[i].userName}</span>
+                               <span>${reviewData[i]?.userName}</span>
 
                            </b>
                        </p>
                        <p class="mb-0">
-                        description: <span>${reviewData[i].Description}</span>
+                        description: <span>${reviewData[i]?.Description}</span>
                        </p>
                        <p class="mb-0">
                         posted on: <span>${
