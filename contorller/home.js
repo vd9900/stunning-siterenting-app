@@ -4,6 +4,7 @@ const fs = require("fs");
 function homeGET(req, res) {
   if (req.session.isAuth) {
     const serverUrl = process.env.SERVER_URL;
+    console.log(serverUrl);
     const html = fs.readFileSync(
       path.join(__dirname, "../views/home.html"),
       "utf8"
